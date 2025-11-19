@@ -28,4 +28,4 @@ This script defines the relational schema for the Airbnb platform, creating six 
 
 ## Execution Notes
 
-Before running the `schema.sql` script, ensure your database system supports `UUID nd the creation of custom TYPEs (ENUMs). If using an older or different SQL dialect (e.g., MySQL), you may need to adjust UUID to CHAR(36) and replace custom TYPEs with VARCHAR columns and explicit CHECK constraints.
+Before running the `schema.sql` script, ensure your database system supports `UUID` and the creation of custom TYPEs (ENUMs). If using an older or different SQL dialect (e.g., MySQL), you may need to adjust UUID to CHAR(36) and replace custom TYPEs with VARCHAR columns and explicit CHECK constraints.
