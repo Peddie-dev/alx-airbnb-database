@@ -1,1 +1,3 @@
-yes
+# Database requirements
+
+![](./requirements.drawio.svg)
