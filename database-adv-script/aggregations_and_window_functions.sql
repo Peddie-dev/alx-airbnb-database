@@ -27,3 +27,19 @@ LEFT JOIN bookings b
     ON p.id = b.property_id
 GROUP BY p.id, p.title
 ORDER BY row_number_rank;
+
+
+-- ============================================================
+-- 3. WINDOW FUNCTION QUERY: Rank properties using RANK()
+-- ============================================================
+
+SELECT
+    p.id AS property_id,
+    p.title AS property_title,
+    COUNT(b.id) AS total_bookings,
+    RANK() OVER (ORDER BY COUNT(b.id) DESC) AS rank
+FROM properties p
+LEFT JOIN bookings b
+    ON p.id = b.property_id
+GROUP BY p.id, p.title
+ORDER BY rank;
