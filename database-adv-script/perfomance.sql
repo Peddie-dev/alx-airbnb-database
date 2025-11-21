@@ -1,11 +1,10 @@
--- ================================================
+-- ============================================================
 -- PERFORMANCE TEST: COMPLEX BOOKINGS QUERY
--- ================================================
+-- ============================================================
 
--- Initial unoptimized query (intentionally heavy)
--- Retrieves bookings + users + properties + payments
--- This version may cause sequential scans and unnecessary joins
-
+-- Initial unoptimized query (includes WHERE/AND clauses)
+-- Retrieves bookings + users + properties + payments for active bookings in 2024
+EXPLAIN ANALYZE
 SELECT 
     b.id AS booking_id,
     b.check_in_date,
@@ -20,18 +19,16 @@ SELECT
 FROM bookings b
 JOIN users u ON u.id = b.user_id
 JOIN properties p ON p.id = b.property_id
-LEFT JOIN payments pay ON pay.booking_id = b.id;
+LEFT JOIN payments pay ON pay.booking_id = b.id
+WHERE b.check_in_date >= '2024-01-01' AND b.check_out_date <= '2024-12-31';
 
-
--- ================================================
+-- ============================================================
 -- OPTIMIZED QUERY (Refactored)
--- ================================================
+-- ============================================================
 
--- Improvements include:
--- 1. Only selecting necessary columns
--- 2. Using EXISTS instead of LEFT JOIN when payment data is not required
--- 3. Ensuring proper indexes are utilized
-
+-- 1. Only necessary columns
+-- 2. Use indexes for WHERE clause filtering
+EXPLAIN ANALYZE
 SELECT 
     b.id AS booking_id,
     b.check_in_date,
@@ -44,4 +41,5 @@ FROM bookings b
 JOIN users u ON u.id = b.user_id
 JOIN properties p ON p.id = b.property_id
 LEFT JOIN payments pay ON pay.booking_id = b.id
+WHERE b.check_in_date >= '2024-01-01' AND b.check_out_date <= '2024-12-31'
 ORDER BY b.check_in_date DESC;
