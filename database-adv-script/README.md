@@ -55,3 +55,35 @@ Execute the SQL script using your database tool or psql command:
 ```bash
 psql -d airbnb_db -f subqueries.sql
 
+# SQL Aggregations & Window Functions – Airbnb Database
+
+This directory contains SQL scripts demonstrating aggregation functions and window functions used for data analysis in the Airbnb database.
+
+## Files
+
+### `aggregations_and_window_functions.sql`
+
+This script includes:
+
+#### 1. Aggregation with GROUP BY  
+A query that calculates the **total number of bookings per user** using:
+- `COUNT()`
+- `GROUP BY`
+- `ORDER BY`
+
+#### 2. Window Function (RANK)  
+A query that ranks properties based on the **total number of bookings** they have received, using:
+- `RANK() OVER()`
+- `ORDER BY`
+- `GROUP BY`
+
+This helps analyze the most popular properties on the platform.
+
+---
+
+## How to Run
+
+Use psql to execute:
+
+```bash
+psql -d airbnb_db -f aggregations_and_window_functions.sql
